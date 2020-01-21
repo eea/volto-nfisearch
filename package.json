@@ -1,0 +1,18 @@
+{
+  "name": "volto-nfisearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^5.15.0",
+    "d3-scale": "^3.2.1",
+    "react-d3-library": "^1.1.8",
+    "react-range": "^1.4.9",
+    "react-semantic-ui-range": "^0.7.0"
+  }
+}

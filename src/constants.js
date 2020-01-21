@@ -1,0 +1,16 @@
+// APP
+export const SET_LOADER = 'SET_LOADER'; 
+// FACETS
+export const GET_KEYWORDS = 'GET_KEYWORDS';
+export const GET_COUNTRY = 'GET_COUNTRY';
+export const GET_DATA_SET = 'GET_DATA_SET';
+export const GET_DATA_TYPE = 'GET_DATA_TYPE';
+export const GET_INFO_LEVEL = 'GET_INFO_LEVEL';
+export const GET_LANGUAGE = 'GET_LANGUAGE';
+export const GET_NUTS_LEVEL = 'GET_NUTS_LEVEL';
+export const GET_RESOURCE_TYPE = 'GET_RESOURCE_TYPE';
+export const GET_TOPIC_CATEGORY = 'GET_TOPIC_CATEGORY';
+export const GET_PUBLICATION_YEARS = 'GET_PUBLICATION_YEARS';
+export const GET_COLECTION_RANGE = 'GET_COLECTION_RANGE';
+// SEARCH
+export const NFI_SEARCH = 'NFI_SEARCH'; 
