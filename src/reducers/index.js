@@ -1,7 +1,2 @@
-import { nfi } from './nfi.js';
-import { loader } from './loader.js';
-
-export default {
-  loader,
-  nfi,
-};
+export { nfi } from './nfi.js';
+export { loader } from './loader.js';

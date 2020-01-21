@@ -1,6 +1,5 @@
 import {
   SET_LOADER,
-  SET_FOLDER_TABS,
   GET_KEYWORDS,
   GET_COUNTRY,
   GET_DATA_SET,
@@ -21,15 +20,6 @@ export function setLoader(value) {
     payload: value,
   };
 }
-
-export function setFolderTabs(payload) {
-  return {
-    type: SET_FOLDER_TABS,
-    payload: payload,
-  };
-}
-
-
 /**
  * Facets GET list requests
  */

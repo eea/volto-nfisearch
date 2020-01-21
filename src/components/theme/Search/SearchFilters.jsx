@@ -22,13 +22,13 @@ const createCheckboxFacet = (data, facet) => {
       <Checkbox
         className="checkbox"
         key={key}
-        checked={data.selectedFilters[facet].includes(`&${facet}=${value}`)}
+        checked={data.selectedFilters[facet]?.includes(`&${facet}=${value}`)}
         value={value}
         name={facet}
         label={label}
         onChange={(event, checkbox) => {
           const query = `&${checkbox.name}=${checkbox.value}`;
-          data.handleFilterSelected(checkbox, 'checkbox', query)
+          data.handleFilterSelected(checkbox, 'checkbox', query);
         }}
       />
     );
@@ -36,9 +36,15 @@ const createCheckboxFacet = (data, facet) => {
 };
 
 const createMultiselectFacet = (data, facet) => {
-  const [options, setOptions] = useState(Object.keys(data.facetsData[facet]).map(item => {
-    return { key: data.facetsData[facet][item].id, text: data.facetsData[facet][item].name, value: data.facetsData[facet][item].name }
-  }))
+  const [options, setOptions] = useState(
+    Object.keys(data.facetsData[facet]).map(item => {
+      return {
+        key: data.facetsData[facet][item].id,
+        text: data.facetsData[facet][item].name,
+        value: data.facetsData[facet][item].name,
+      };
+    }),
+  );
   return (
     <Dropdown
       placeholder="Type..."
@@ -50,23 +56,25 @@ const createMultiselectFacet = (data, facet) => {
       options={options}
       value={data.selectedFilters[facet].split(`&${facet}=`).slice(1)}
       onChange={(event, { value }) => {
-        let query = ''
+        let query = '';
         value.forEach(val => {
-          query += `&${data.facets[facet].queryParams[0]}=${val}`
-        })
-        data.handleFilterSelected({ name: facet }, 'multiselect', query)
+          query += `&${data.facets[facet].queryParams[0]}=${val}`;
+        });
+        data.handleFilterSelected({ name: facet }, 'multiselect', query);
       }}
     />
   );
-}
+};
 
 const createSliderFacet = (data, facet) => {
-  const yearsRange = Object.keys(data.facetsData[facet]).map(item => parseInt(data.facetsData[facet][item].name));
+  const yearsRange = Object.keys(data.facetsData[facet]).map(item =>
+    parseInt(data.facetsData[facet][item].name),
+  );
   const areaChartData = Object.keys(data.facetsData[facet]).map(item => {
     return {
       x: parseInt(data.facetsData[facet][item].name),
-      y: parseInt(data.facetsData[facet][item].number)
-    }
+      y: parseInt(data.facetsData[facet][item].number),
+    };
   });
 
   const STEP = 1;
@@ -77,16 +85,16 @@ const createSliderFacet = (data, facet) => {
   const [areaChart, setAreaChart] = useState('');
 
   useEffect(() => {
-    setAreaChart(area_chart(400, 200, areaChartData))
-  })
-  
+    setAreaChart(area_chart(400, 200, areaChartData));
+  }, [areaChartData]);
+
   return (
     <div
       style={{
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        width: '100%'
+        width: '100%',
       }}
       className="slider"
     >
@@ -98,15 +106,19 @@ const createSliderFacet = (data, facet) => {
         max={MAX}
         onChange={values => setValues(values)}
         onFinalChange={values => {
-          let query = ''
+          let query = '';
           if (values[0] > MIN || values[1] < MAX) {
             if (data.facets[facet].queryParams.length === 2) {
-              query = `&${data.facets[facet].queryParams[0]}=${values[0]}&${data.facets[facet].queryParams[1]}=${values[1]}`
+              query = `&${data.facets[facet].queryParams[0]}=${values[0]}&${
+                data.facets[facet].queryParams[1]
+              }=${values[1]}`;
             } else if (data.facets[facet].queryParams.length === 1) {
-              query = `&${data.facets[facet].queryParams}=${values[0]}__${values[1]}`
+              query = `&${data.facets[facet].queryParams}=${values[0]}__${
+                values[1]
+              }`;
             }
           }
-          data.handleFilterSelected({ name: facet }, 'slider', query)
+          data.handleFilterSelected({ name: facet }, 'slider', query);
         }}
         renderTrack={({ props, children }) => (
           <div
@@ -117,7 +129,7 @@ const createSliderFacet = (data, facet) => {
               height: '36px',
               marginTop: '0',
               display: 'flex',
-              width: '100%'
+              width: '100%',
             }}
           >
             <div
@@ -130,9 +142,9 @@ const createSliderFacet = (data, facet) => {
                   values: values,
                   colors: ['#ccc', '#CD4200', '#ccc'],
                   min: MIN,
-                  max: MAX
+                  max: MAX,
                 }),
-                alignSelf: 'center'
+                alignSelf: 'center',
               }}
             >
               {children}
@@ -151,7 +163,7 @@ const createSliderFacet = (data, facet) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              boxShadow: '0px 2px 6px #AAA'
+              boxShadow: '0px 2px 6px #AAA',
             }}
           >
             <div
@@ -164,7 +176,7 @@ const createSliderFacet = (data, facet) => {
                 fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
                 padding: '4px',
                 borderRadius: '4px',
-                backgroundColor: 'transparent'
+                backgroundColor: 'transparent',
               }}
             >
               {values[index]}
@@ -173,7 +185,7 @@ const createSliderFacet = (data, facet) => {
               style={{
                 height: '16px',
                 width: '5px',
-                backgroundColor: isDragged ? '#CD4200' : '#CCC'
+                backgroundColor: isDragged ? '#CD4200' : '#CCC',
               }}
             />
           </div>
@@ -181,11 +193,15 @@ const createSliderFacet = (data, facet) => {
       />
     </div>
   );
-
-}
+};
 
 const SearchFilters = ({ data }) => {
-  let renderTopicsFacet, renderNutsLevelFacet, renderCountryMultiselectFacet, renderResultsFormatFacet, renderPublishedYearFacet, renderCollectionsRangeFacet;
+  let renderTopicsFacet,
+    renderNutsLevelFacet,
+    renderCountryMultiselectFacet,
+    renderResultsFormatFacet,
+    renderPublishedYearFacet,
+    renderCollectionsRangeFacet;
   if (
     data.facetsData &&
     data.selectedFilters &&
@@ -267,12 +283,9 @@ const SearchFilters = ({ data }) => {
       </div>
       <div className="filters-area">
         <h3>Results Format</h3>
-        <div className="checkbox-area">
-          {renderResultsFormatFacet}
-        </div>
+        <div className="checkbox-area">{renderResultsFormatFacet}</div>
       </div>
     </div>
-
   );
 };
 

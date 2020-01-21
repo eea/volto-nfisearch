@@ -8,11 +8,16 @@
   },
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eea/volto-nfisearch.git"
+  },
   "dependencies": {
     "d3": "^5.15.0",
     "d3-scale": "^3.2.1",
     "react-d3-library": "^1.1.8",
     "react-range": "^1.4.9",
     "react-semantic-ui-range": "^0.7.0"
-  }
+  },
+  "voltoCustomizationPath": "src/customizations"
 }

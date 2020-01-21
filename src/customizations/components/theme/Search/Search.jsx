@@ -721,7 +721,7 @@ export default compose(
       subject: qs.parse(props.location.search).Subject,
       path: qs.parse(props.location.search).path,
       pathname: props.location.pathname,
-      originalKeywords: state.nfi.keyword.map(keyword => ({
+      originalKeywords: state.nfi?.keyword.map(keyword => ({
         key: keyword.id,
         id: keyword.id,
         text: keyword.name,

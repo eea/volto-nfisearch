@@ -1,5 +1,5 @@
 // APP
-export const SET_LOADER = 'SET_LOADER'; 
+export const SET_LOADER = 'SET_LOADER';
 // FACETS
 export const GET_KEYWORDS = 'GET_KEYWORDS';
 export const GET_COUNTRY = 'GET_COUNTRY';
